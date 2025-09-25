@@ -65,7 +65,7 @@ net.ipv4.tcp_congestion_control=bbr
 EOF
 
 sysctl -p && sysctl --system
-echo "${Info} 已根据内存 ${MEM_GB}G 设置 TCP 缓冲区: rmem=$RMEM wmem=$WMEM"
+echo -e "${Info} 已根据内存 ${MEM_GB}G 设置 TCP 缓冲区: rmem=$RMEM wmem=$WMEM"
 }
 
 enable_forwarding(){ # 开启内核转发
@@ -156,11 +156,11 @@ DefaultLimitNPROC=$LIMIT
 EOF
 
 systemctl daemon-reload
-echo "${Info} 已根据内存 ${MEM_GB}G 设置资源限制: nofile/nproc=$LIMIT file-max=$LIMIT"
+echo -e "${Info} 已根据内存 ${MEM_GB}G 设置资源限制: nofile/nproc=$LIMIT file-max=$LIMIT"
 }
 
 restore_defaults(){ # 恢复系统默认配置
-echo "${Info} 恢复系统默认配置中..."
+echo -e "${Info} 恢复系统默认配置中..."
 
 sed -i '/^net.ipv4.tcp_/d' /etc/sysctl.conf
 sed -i '/^net.core.rmem_max/d' /etc/sysctl.conf
@@ -186,7 +186,7 @@ sed -i '/DefaultLimitNPROC/d' /etc/systemd/system.conf
 sysctl --system
 systemctl daemon-reexec
 
-echo "${Info} 已恢复为系统默认参数。"
+echo -e "${Info} 已恢复为系统默认参数。"
 }
 
 verify_settings(){ # 验证命令合集
